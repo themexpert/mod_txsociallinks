@@ -1,2 +1,2 @@
-# mod_tx_links
-Joomla Links module
+# mod_txsociallinks
+This module is to show links with font-awosome icons.

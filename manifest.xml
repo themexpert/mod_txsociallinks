@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>Xpert Social Links</name>
+        <description>Xpert Social Links update</description>
+        <element>mod_txsociallinks</element>
+        <type>module</type>
+        <version>1.0.0</version>
+        <client>site</client>
+        <infourl title="Xpert Social Links Package">
+            https://github.com/themexpert/mod_txsociallinks
+        </infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/themexpert/mod_txsociallinks/archive/master.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <targetplatform name="joomla" version="3.[456789]" />
+    </update>
+</updates>

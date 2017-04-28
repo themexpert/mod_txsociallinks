@@ -193,10 +193,10 @@ class JFormFieldFaselector extends JFormField
 		JHtml::_('jquery.framework');
 		JHtml::_('bootstrap.framework');
 		$document = JFactory::getDocument();
-		$document->addStyleSheet(JURI::root().'media/mod_txlinks/fontawesome/css/font-awesome.min.css');
+		$document->addStyleSheet(JURI::root().'media/mod_txsociallinks/fontawesome/css/font-awesome.min.css');
 
-		$document->addStyleSheet(JURI::root().'media/mod_txlinks/css/icon-selector.css');
-		$document->addScript(JURI::root().'media/mod_txlinks/js/icon-selector.js');
+		$document->addStyleSheet(JURI::root().'media/mod_txsociallinks/css/icon-selector.css');
+		$document->addScript(JURI::root().'media/mod_txsociallinks/js/icon-selector.js');
 		if(!defined('FAVICON_SELECTOR')){
 			$document->addScriptDeclaration('
 				function show_faselector(selecor){

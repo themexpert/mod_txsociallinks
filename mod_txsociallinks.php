@@ -21,8 +21,8 @@ $moduleclass_sfx 	= htmlspecialchars($params->get('moduleclass_sfx'));
 if($load_font_awosome)
 {
 	$document = JFactory::getDocument();
-	$document->addStyleSheet(JURI::root().'media/mod_txlinks/fontawesome/css/font-awesome.min.css');
+	$document->addStyleSheet(JURI::root().'media/mod_txsociallinks/fontawesome/css/font-awesome.min.css');
 }
 
 $lists = ModTxLinksHelper::group_by_key($list_labels);
-require JModuleHelper::getLayoutPath('mod_txlinks', $params->get('layout', 'default'));
+require JModuleHelper::getLayoutPath('mod_txsociallinks', $params->get('layout', 'default'));
