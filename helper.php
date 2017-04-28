@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
  * @subpackage  mod_search
  * @since       1.5
  */
-class ModTxSocialLinksHelper
+class ModTxLinksHelper
 {
 	/**
 	 * Display the search button as an image.

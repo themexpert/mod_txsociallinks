@@ -11,21 +11,18 @@ defined('_JEXEC') or die;
 
 // Include the syndicate functions only once
 require_once __DIR__ . '/helper.php';
-$app  = JFactory::getApplication();
 
-$text         		= $params->get('text', '');
-$show_label   		= $params->get('show_label', 0);
-$json         		= $params->get('list_labels');
-$list_labels  		= json_decode($json, true);
+$text   			= $params->get('text', '');
+$json  				= $params->get('list_labels');
 $load_font_awosome  = $params->get('load_font_awosome', 0);
-
-$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-$lists = ModTxSocialLinksHelper::group_by_key($list_labels);
+$list_labels 		= json_decode($json, true);
+$moduleclass_sfx 	= htmlspecialchars($params->get('moduleclass_sfx'));
 
 if($load_font_awosome)
 {
 	$document = JFactory::getDocument();
-	$document->addStyleSheet(JURI::root().'media/mod_txsociallinks/fontawesome/css/font-awesome.min.css');
+	$document->addStyleSheet(JURI::root().'media/mod_txlinks/fontawesome/css/font-awesome.min.css');
 }
 
-require JModuleHelper::getLayoutPath('mod_txsociallinks', $params->get('layout', 'default'));
+$lists = ModTxLinksHelper::group_by_key($list_labels);
+require JModuleHelper::getLayoutPath('mod_txlinks', $params->get('layout', 'default'));

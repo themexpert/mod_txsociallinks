@@ -652,16 +652,7 @@ var tx_font_awesome_icons = [
 
 					'<div class="modal-footer">'+
 						'<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>'+
-						'<button type="button" class="btn btn-success faicon-insert-button pull-right">Insert Icon</button>'+
-
-						// '<select id ="tx-icon-size" class="form-control pull-right">'+
-						// 	'<option value="fa-5x">Icon Size..</option>'+
-						// 	'<option value="fa-lg">fa-lg</option>'+
-						// 	'<option value="fa-2x">fa-2x</option>'+
-						// 	'<option value="fa-3x">fa-3x</option>'+
-						// 	'<option value="fa-4x">fa-4x</option>'+
-						// 	'<option value="fa-5x">fa-5x</option>'+
-						// '</select>'+
+						'<button type="button" class="btn btn-success pull-right faicon-insert-button ">Insert Icon</button>'+
 					'</div>'+
 				'</div>'+
 			'</div>'+
@@ -691,27 +682,27 @@ var tx_font_awesome_icons = [
 	};
 
 	var getSelectedIcon = function(){
-		var iconSize = $("#tx-icon-size").val();
+		// var iconSize = $("#tx-icon-size").val();
 		var iconClass = $(".tx-icons-list li.active span").attr('class');
-		console.log("size: %s, class: %s", iconSize, iconClass);
+		// console.log("size: %s, class: %s", iconSize, iconClass);
 
-		return iconClass ? iconClass+" "+iconSize : false;
+		// return iconClass ? iconClass+" "+iconSize : false;
+		return iconClass ? iconClass : false;
 	};
 
 	$(document).on("click", ".faicon-insert-button", function(){
 		var icon = getSelectedIcon();
 		var iconClass = $(".tx-icons-list li.active span").attr('class');
-		
 		if(!icon) {
 			alert("please select an icon to select");
 			return;
 		}
 
 		ACTIVE_INPUT.val(icon);
-    var a = '<i class="'+iconClass+'"></i>';
+    	var a = '<i class="'+iconClass+'"></i>';
 		ACTIVE_INPUT.parent().find('span.add-on').html(a);
 
-    ACTIVE_INPUT.trigger("icon:inserted");
+    	ACTIVE_INPUT.trigger("icon:inserted");
 		$("#tx-icon-list-modal").modal('hide');
 	});
 
@@ -729,11 +720,14 @@ var tx_font_awesome_icons = [
 
 
 	var iconSelector = function(options){
+		
 		if(options){
-	      	ACTIVE_INPUT =  jQuery(options).prev();
-	      	// ACTIVE_INPUT = $(options.input);
-			$("#tx-icon-list-modal").modal('show');
+      		ACTIVE_INPUT =  jQuery(options).prev();
+			$("#tx-icon-list-modal").modal('show');			
+			// generateIconsDOM(icons);			
 		}else{
+      		// ACTIVE_INPUT = $(options.input);
+			// $("#tx-icon-list-modal").modal('show');
 			generateIconsDOM(icons);			
 		}
 		// $(this).on("click", function(e){

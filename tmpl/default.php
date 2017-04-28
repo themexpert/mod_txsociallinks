@@ -8,23 +8,22 @@
  */
 
 defined('_JEXEC') or die;
-$text = '';
-if($show_label){
-  $text .= '<span class="text-msg">'.$text.'</span>';
-}
-
-$msg = '';
-foreach ($lists as $key => $value) {
-  $msg .= '<a class="icon-set" href="'.$value['link'].'" target="_blank">';
-  $msg .= '<i class="'.$value['icon'].'"></i>';
-  if($show_label){
-    $msg .= $value['label'];
-  }
-  $msg .= '</a> ';
-}
 ?>
-<div class="mod-txsociallinks<?php echo $moduleclass_sfx ?>">
-<p>
-  <?php echo $text .' '. $msg;?>
-</p>
+<div class="mod-txlinks<?php echo $moduleclass_sfx ?>">
+	<?php if($params->get('show_label', 1)): ?>
+		<h3 class="text-msg"><?php echo $text; ?></h3>
+	<?php endif; ?>
+	<ul class="list-inline inline" style="font-size:<?php echo $params->get('font_size') ?>">
+		<?php foreach ($lists as $key => $value): ?>
+			<li>
+				<a href="<?php echo $value['links']; ?>" class="link-set">
+					<i class="<?php echo $value['icon']; ?>"></i> 
+					<?php if($params->get('show_icon_label', 1)): ?>
+						<?php echo $value['label']; ?>
+					<?php endif; ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+
 </div>

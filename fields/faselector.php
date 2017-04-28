@@ -164,6 +164,11 @@ class JFormFieldFaselector extends JFormField
 	{
 		// Translate placeholder text
 		$hint = $this->translateHint ? JText::_($this->hint) : $this->hint;
+		if(isset($this->element['showsize'])){
+			$showsize = (int) $this->element['showsize'];
+		}else{
+			$showsize = 1;
+		}
 
 		// Initialize some field attributes.
 		$size         = !empty($this->size) ? ' size="' . $this->size . '"' : '';
@@ -188,20 +193,19 @@ class JFormFieldFaselector extends JFormField
 		JHtml::_('jquery.framework');
 		JHtml::_('bootstrap.framework');
 		$document = JFactory::getDocument();
-		$document->addStyleSheet(JURI::root().'media/mod_txsociallinks/fontawesome/css/font-awesome.min.css');
+		$document->addStyleSheet(JURI::root().'media/mod_txlinks/fontawesome/css/font-awesome.min.css');
 
-		$document->addStyleSheet(JURI::root().'media/mod_txsociallinks/css/icon-selector.css');
-		$document->addScript(JURI::root().'media/mod_txsociallinks/js/icon-selector.js');
+		$document->addStyleSheet(JURI::root().'media/mod_txlinks/css/icon-selector.css');
+		$document->addScript(JURI::root().'media/mod_txlinks/js/icon-selector.js');
 		if(!defined('FAVICON_SELECTOR')){
-		$document->addScriptDeclaration('
-			function show_faselector(e)
-			{
-				jQuery(".faicon-selector").iconSelector(e);
-			}
-			jQuery(document).ready(function (){
-	    		jQuery(".faicon-selector").iconSelector();
-			});
-		');
+			$document->addScriptDeclaration('
+				function show_faselector(selecor){
+					jQuery(".faicon-selector").iconSelector(selecor);
+				}
+				jQuery(document).ready(function (){
+	    			jQuery(".faicon-selector").iconSelector();
+				});
+			');
 			define('FAVICON_SELECTOR', true);
 		}
 		$datalist = '';
@@ -228,12 +232,40 @@ class JFormFieldFaselector extends JFormField
 			$datalist .= '</datalist>';
 			$list     = ' list="' . $this->id . '_datalist"';
 		}
+
+		$value = $this->value;
+		// print_r($value);die;
+		if(is_array($value)){
+			$name = $value['name'];
+			$size = $value['size'];
+		}
+
+		if(!isset($name)){
+			$name = 'fa fa-font';
+		}
+
+		if($showsize){
+			$itemname = $this->name . '[name]';
+		}else{
+			$itemname = $this->name;
+		}
+
 		$html[] = '<div class="input-append input-prepend">';
-		$html[] = '<span class="add-on"><i class="fa fa-font"></i></span>';
-		$html[] = '<input type="text" name="' . $this->name . '" id="' . $this->id . '"' . $dirname . ' value="'
-			. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"' . $class . $size . $disabled . $readonly . $list
+		$html[] = '<span class="add-on"><i class="'.$name.'"></i></span>';
+		// $html[] = '<input type="text" name="' . $this->name . '[name]" id="' . $this->id . '"' . $dirname . ' value="'
+		$html[] = '<input type="text" name="' . $itemname . '" id="' . $this->id . '"' . $dirname . ' value="'
+			. htmlspecialchars($name, ENT_COMPAT, 'UTF-8') . '"' . $class . $size . $disabled . $readonly
 			. $hint . $onchange . $maxLength . $required . $autocomplete . $autofocus . $spellcheck . $inputmode . $pattern . ' />';
-		$html[] = $datalist;
+
+		if($showsize)
+		{
+			$html[] = '<input class="input-xs input-mini" size="4" type="text" placeholder="Size" name="' . $this->name . '[size]"' . $dirname . $list
+				. ' value="'
+				. htmlspecialchars($size, ENT_COMPAT, 'UTF-8') . '" list="' . $this->id . '_datalist"'
+				. ' />' ;
+				$html[] = $datalist;
+		}
+
 		$html[] = '<div class="btn faicon-selector" onclick="show_faselector(this);">Select</div>';
 		$html[] = '</div>';
 		return implode($html);
